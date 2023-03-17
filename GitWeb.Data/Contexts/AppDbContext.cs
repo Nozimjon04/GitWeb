@@ -10,7 +10,7 @@ public class AppDbContext:DbContext
     DbSet<OrganizationMember> OrganizationsMembers { get; set;}
     DbSet<OrganizationRepository> OrganizationsRepositories { get; set;}
     DbSet<User> Users { get; set; }
-    DbSet<UserFollow> UsersFollows { get; set; }
+    DbSet<UserFollower> UsersFollows { get; set; }
     DbSet<UserRepo> UsersRepos { get; set; }
     DbSet<UserRepoStar> UsersReposStars { get; set;}
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

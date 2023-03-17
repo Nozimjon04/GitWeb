@@ -2,11 +2,12 @@
 
 namespace GitWeb.Domain.Entities;
 
-public class UserFollow:Auditable
+public class UserFollower:Auditable
 {
     public long FollowerId { get; set; }
-    public User UserFollower { get; set; }
+    public User FollowerUser { get; set; }
     public long FollowingId { get; set; }
-    public User UserFollowing { get; set; }
+    public User FollowingUser { get; set; }
+   
     
 }
