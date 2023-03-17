@@ -23,16 +23,15 @@ public class UserRepository : IUserRepository
         {
             return null;
         }
-        //entity.FirstName=user.FirstName;
-        //entity.LastName=user.LastName;
-        //entity.Email=user.Email;
-        //entity.Password=user.Password;
-        //entity.Bio=user.Bio;
-        //entity.Address=user.Address;
-        //entity.CreatedAt=user.CreatedAt;
-        //entity.UpdatedAt=DateTime.Now;
-        this.appDbContext.Users.Update(user);
-        //await this.appDbContext.SaveChangesAsync();
+        entity.FirstName = user.FirstName;
+        entity.LastName = user.LastName;
+        entity.Email = user.Email;
+        entity.Password = user.Password;
+        entity.Bio = user.Bio;
+        entity.Address = user.Address;
+        entity.CreatedAt = user.CreatedAt;
+        entity.UpdatedAt = DateTime.Now;
+        await this.appDbContext.SaveChangesAsync();
         return entity;
     }
     public async ValueTask<bool> DelateAsync(long id)

@@ -1,32 +1,60 @@
-﻿using GitWeb.Data.IRepositories;
+﻿using GitWeb.Data.Contexts;
+using GitWeb.Data.IRepositories;
 using GitWeb.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace GitWeb.Data.Repositories;
 
 public class OrganizationFollowerRepository : IOrganizationFollowerRepository
 {
-    public ValueTask<bool> DeleteAsync(long id)
+    private readonly AppDbContext appDbContext = new AppDbContext();
+    public async ValueTask<bool> DeleteAsync(long id)
     {
-        throw new NotImplementedException();
+        var entity = await this.appDbContext.OrganizationsFollowers.FirstOrDefaultAsync(user => user.Id.Equals(id));
+        if (entity is null)
+        {
+            return false;
+        }
+        this.appDbContext.OrganizationsFollowers.Remove(entity);
+        await this.appDbContext.SaveChangesAsync();
+        return true;
     }
 
-    public ValueTask<OrganizationFollower> InsertAsync(OrganizationFollower organizationFollower)
+    public  async ValueTask<OrganizationFollower> InsertAsync(OrganizationFollower organizationFollower)
     {
-        throw new NotImplementedException();
+        var entity = await this.appDbContext.OrganizationsFollowers.AddAsync(organizationFollower);
+        await this.appDbContext.SaveChangesAsync();
+        return entity.Entity;
     }
 
     public IQueryable<OrganizationFollower> SelectAllAsync()
     {
-        throw new NotImplementedException();
+        return this.appDbContext.OrganizationsFollowers;
     }
 
-    public ValueTask<OrganizationFollower> SelectByIdAsync(long id)
+    public async ValueTask<OrganizationFollower> SelectByIdAsync(long id)
     {
-        throw new NotImplementedException();
+
+        var entity = await this.appDbContext.OrganizationsFollowers.FirstOrDefaultAsync(user => user.Id.Equals(id));
+        return entity;
     }
 
-    public ValueTask<OrganizationFollower> UpdateAsync(OrganizationFollower organization)
+    public async ValueTask<OrganizationFollower> UpdateAsync(OrganizationFollower organization)
     {
-        throw new NotImplementedException();
+        var entity = await this.appDbContext.OrganizationsFollowers.FirstOrDefaultAsync(x => x.Id.Equals(organization.Id));
+        if (entity is null)
+        {
+            return null;
+        }
+        entity.Id= organization.Id;
+        entity.OrganizationFollowerId=organization.OrganizationFollowerId;
+        entity.OrganizationId=organization.OrganizationId;
+        entity.UserOrganization = organization.UserOrganization;
+        entity.Organization = organization.Organization;
+        entity.CreatedAt = organization.CreatedAt;
+        entity.UpdatedAt = DateTime.Now;
+        await this.appDbContext.SaveChangesAsync();
+        return entity;
+        
     }
 }

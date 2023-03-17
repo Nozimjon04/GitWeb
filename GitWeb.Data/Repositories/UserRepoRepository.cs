@@ -30,6 +30,7 @@ public class UserRepoRepository : IUserRepoRepository
         entity.Id = userRepo.Id;
         entity.StarCount=userRepo.StarCount;
         entity.type = userRepo.type;
+        await this.appDbContext.SaveChangesAsync();
         return entity;
         
     }

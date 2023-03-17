@@ -48,7 +48,14 @@ public class UserRepoStarRepository : IUserRepoStarRepository
         {
             return null;
         }
-        this.appDbContext.UsersReposStars.Update(entity);
+        entity.Id= userRepo.Id;
+        entity.UpdatedAt= DateTime.Now;
+        entity.CreatedAt=userRepo.CreatedAt;
+        entity.User=userRepo.User;
+        entity.UserId=userRepo.UserId;
+        entity.userRepo=userRepo.userRepo;
+        entity.UserRepoId = userRepo.UserRepoId;
+        entity.UserId=userRepo.UserId;
         await this.appDbContext.SaveChangesAsync();
         return entity;
     }

@@ -1,32 +1,61 @@
-﻿using GitWeb.Data.IRepositories;
+﻿using GitWeb.Data.Contexts;
+using GitWeb.Data.IRepositories;
 using GitWeb.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace GitWeb.Data.Repositories;
 
 public class OrganizationRepoRepository : IOrganizationRepoRepository
 {
-    public ValueTask<bool> DeleteAsync(long id)
+    private readonly AppDbContext appDbContext = new AppDbContext();
+    public async ValueTask<bool> DeleteAsync(long id)
     {
-        throw new NotImplementedException();
+        var entity = await this.appDbContext.OrganizationsRepos.FirstOrDefaultAsync(user => user.Id.Equals(id));
+        if (entity is null)
+        {
+            return false;
+        }
+        this.appDbContext.OrganizationsRepos.Remove(entity);
+        await this.appDbContext.SaveChangesAsync();
+        return true;
     }
 
-    public ValueTask<OrganizationRepo> InsertAsync(OrganizationRepo organizationRepo)
+    public  async ValueTask<OrganizationRepo> InsertAsync(OrganizationRepo organizationRepo)
     {
-        throw new NotImplementedException();
+        var entity = await this.appDbContext.OrganizationsRepos.AddAsync(organizationRepo);
+        await this.appDbContext.SaveChangesAsync();
+        return entity.Entity;
+       
     }
 
     public IQueryable<OrganizationRepo> SelectAllAsync()
     {
-        throw new NotImplementedException();
+        return this.appDbContext.OrganizationsRepos;
     }
 
-    public ValueTask<OrganizationRepo> SelectByIdAsync(long id)
+    public async ValueTask<OrganizationRepo> SelectByIdAsync(long id)
     {
-        throw new NotImplementedException();
+        var entity = await this.appDbContext.OrganizationsRepos.FirstOrDefaultAsync(user => user.Id.Equals(id));
+        return entity;
     }
 
-    public ValueTask<OrganizationRepo> UpdateAsync(OrganizationRepo organizationRepo)
+    public async ValueTask<OrganizationRepo> UpdateAsync(OrganizationRepo organizationRepo)
     {
-        throw new NotImplementedException();
+        var entity = await this.appDbContext.OrganizationsRepos.FirstOrDefaultAsync(x => x.Id.Equals(organizationRepo.Id));
+        if (entity is null)
+        {
+            return null;
+        }
+        entity.Id= organizationRepo.Id;
+        entity.Name= organizationRepo.Name;
+        entity.StarCount= organizationRepo.StarCount;
+        entity.UpdatedAt=DateTime.Now;
+        entity.CreatedAt = organizationRepo.CreatedAt;
+        entity.OrganizationId = organizationRepo.Id;
+        entity.Organization = organizationRepo.Organization;
+        entity.Type = organizationRepo.Type;
+       await this.appDbContext.SaveChangesAsync();
+        return entity;
+        
     }
 }
