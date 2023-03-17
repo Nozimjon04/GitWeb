@@ -8,7 +8,7 @@ public class AppDbContext:DbContext
     DbSet<Organization> Organizations { get; set; }
     DbSet<OrganizationFollower> OrganizationsFollowers { get;set; }
     DbSet<OrganizationMember> OrganizationsMembers { get; set;}
-    DbSet<OrganizationRepository> OrganizationsRepositories { get; set;}
+    DbSet<OrganizationRepo> OrganizationsRepos { get; set;}
     DbSet<User> Users { get; set; }
     DbSet<UserFollower> UsersFollows { get; set; }
     DbSet<UserRepo> UsersRepos { get; set; }
