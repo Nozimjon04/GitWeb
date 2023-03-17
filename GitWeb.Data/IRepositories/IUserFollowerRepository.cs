@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GitWeb.Domain.Entities;
 
-namespace GitWeb.Data.IRepositories
+namespace GitWeb.Data.IRepositories;
+
+public interface IUserFollowerRepository
 {
-    internal class IUserFollowerRepository
-    {
-    }
+    ValueTask<UserFollower> InsertAsync(UserFollower userFollower);
+    ValueTask<UserFollower> UpdateAsync(UserFollower userFollower);
+    ValueTask<bool> DelateAsync(long id);
+    ValueTask<UserFollower> SelectByIdAsync(long id);
+    IQueryable<UserFollower> SelectAllAsync();
 }

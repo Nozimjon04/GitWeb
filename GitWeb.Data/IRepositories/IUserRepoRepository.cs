@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GitWeb.Domain.Entities;
 
-namespace GitWeb.Data.IRepositories
+namespace GitWeb.Data.IRepositories;
+
+public interface IUserRepoRepository
 {
-    internal class UserRepoRepository
-    {
-    }
+    ValueTask<UserRepo> InsertAsync(UserRepo userRepo);
+    ValueTask<UserRepo> UpdateAsync(UserRepo userRepo);
+    ValueTask<bool> DelateAsync(long id);
+    ValueTask<UserRepo> SelectByIdaAsync(long id);
+    IQueryable<UserRepo> SelectAllAsync();
 }

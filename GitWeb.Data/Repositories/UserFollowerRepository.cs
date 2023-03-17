@@ -1,12 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GitWeb.Data.IRepositories;
+using GitWeb.Domain.Entities;
 
-namespace GitWeb.Data.Repositories
+namespace GitWeb.Data.Repositories;
+
+public class UserFollowerRepository : IUserFollowerRepository
 {
-    internal class UserFollowerRepository
+    public ValueTask<bool> DelateAsync(long id)
     {
+        throw new NotImplementedException();
+    }
+
+    public ValueTask<UserFollower> InsertAsync(UserFollower userFollower)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IQueryable<UserFollower> SelectAllAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public ValueTask<UserFollower> SelectByIdAsync(long id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ValueTask<UserFollower> UpdateAsync(UserFollower userFollower)
+    {
+        throw new NotImplementedException();
     }
 }

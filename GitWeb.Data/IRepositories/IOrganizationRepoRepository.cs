@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GitWeb.Domain.Entities;
 
-namespace GitWeb.Data.IRepositories
+namespace GitWeb.Data.IRepositories;
+
+public interface IOrganizationRepoRepository
 {
-    internal class IOrganizationRepoRepository
-    {
-    }
+    ValueTask<OrganizationRepo> InsertAsync(OrganizationRepo organizationRepo);
+    ValueTask<OrganizationRepo> UpdateAsync(OrganizationRepo organizationRepo);
+    ValueTask<bool> DeleteAsync(long id);    
+    ValueTask<OrganizationRepo> SelectByIdAsync(long id);
+    IQueryable<OrganizationRepo> SelectAllAsync();
 }

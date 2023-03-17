@@ -1,12 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GitWeb.Data.IRepositories;
+using GitWeb.Domain.Entities;
 
-namespace GitWeb.Data.Repositories
+namespace GitWeb.Data.Repositories;
+
+public class OrganizationRepoRepository : IOrganizationRepoRepository
 {
-    internal class OrganizationRepoRepository
+    public ValueTask<bool> DeleteAsync(long id)
     {
+        throw new NotImplementedException();
+    }
+
+    public ValueTask<OrganizationRepo> InsertAsync(OrganizationRepo organizationRepo)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IQueryable<OrganizationRepo> SelectAllAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public ValueTask<OrganizationRepo> SelectByIdAsync(long id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ValueTask<OrganizationRepo> UpdateAsync(OrganizationRepo organizationRepo)
+    {
+        throw new NotImplementedException();
     }
 }

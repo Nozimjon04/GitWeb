@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GitWeb.Data\GitWeb.Data.csproj" />
+    <ProjectReference Include="..\GitWeb.Domain\GitWeb.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
